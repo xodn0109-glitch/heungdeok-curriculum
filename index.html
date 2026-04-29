@@ -819,7 +819,7 @@ const SEMESTERS = [
     code: '2-1', title: '2학년 1학기', color: 'A',
     pools: [
       {
-        label: '학기당 <strong>12학점 / 택 4과목</strong>',
+        credits: 12, pick: 4,
         note: '2학년 두 학기 모두 같은 풀에서 선택합니다 (단 과학 진로 4과목은 2-2부터 개설).',
         getSubjects: (year) => SUBJECTS.A_basic.filter(s => !s.only || s.only === year),
       },
@@ -829,7 +829,7 @@ const SEMESTERS = [
     code: '2-2', title: '2학년 2학기', color: 'D',
     pools: [
       {
-        label: '학기당 <strong>12학점 / 택 4과목</strong>',
+        credits: 12, pick: 4,
         note: '2-1 풀 + 과학 진로 4과목(역학과 에너지 / 물질과 에너지 / 세포와 물질대사 / 지구시스템과학) 추가.',
         getSubjects: (year) => [
           ...SUBJECTS.A_basic.filter(s => !s.only || s.only === year),
@@ -842,12 +842,12 @@ const SEMESTERS = [
     code: '3-1', title: '3학년 1학기', color: 'B',
     pools: [
       {
-        label: '<strong>18학점 / 택 6과목</strong> · 주 선택',
+        kind: '주 선택', credits: 18, pick: 6,
         note: '국어·수학·영어·사회·과학에서 폭넓게 선택. 수능 출제 과목 ★ 표시.',
         getSubjects: () => [...SUBJECTS.BC, ...SUBJECTS.A_late],
       },
       {
-        label: '<strong>6학점 / 택 2과목</strong> · 융합·진로',
+        kind: '융합·진로 선택', credits: 6, pick: 2,
         note: '기술·가정/정보/제2외국어/한문/교양 「최소 4과목 × 3학점」 충족용. 융합 선택은 석차 등급 미산출.',
         getSubjects: () => SUBJECTS.D,
       },
@@ -857,12 +857,12 @@ const SEMESTERS = [
     code: '3-2', title: '3학년 2학기', color: 'C',
     pools: [
       {
-        label: '<strong>21학점 / 택 7과목</strong> · 주 선택',
+        kind: '주 선택', credits: 21, pick: 7,
         note: '3-1과 같은 풀이지만 과학 진로 4과목(역학과 에너지 등)은 포함되지 않습니다.',
         getSubjects: () => SUBJECTS.BC,
       },
       {
-        label: '<strong>6학점 / 택 2과목</strong> · 융합·진로',
+        kind: '융합·진로 선택', credits: 6, pick: 2,
         note: '3-1과 동일한 융합·진로 풀에서 선택.',
         getSubjects: () => SUBJECTS.D,
       },
@@ -889,10 +889,11 @@ function renderGroups(year) {
     `;
     sem.pools.forEach((pool, idx) => {
       const subjects = pool.getSubjects(year);
+      const prefix = pool.kind ? pool.kind : '학기당';
       html += `
         ${idx > 0 ? '<hr style="border:none;border-top:1px dashed var(--border);margin:20px 0;">' : ''}
         <div style="margin-bottom:10px;">
-          <div style="font-size:14px;color:var(--text);font-weight:600;">${pool.label} <span style="color:var(--text-muted);font-weight:500;">· 총 ${subjects.length}개</span></div>
+          <div style="font-size:14px;color:var(--text);font-weight:600;"><strong>${prefix} ${pool.credits}학점</strong> <span style="color:var(--text-muted);font-weight:500;">(3학점 총 ${subjects.length}개 과목 중 택 ${pool.pick}과목)</span></div>
           <p style="font-size:13px;color:var(--text-muted);margin:4px 0 12px;">${pool.note}</p>
         </div>
         <div class="subj-grid">
