@@ -636,7 +636,9 @@
     <div class="choice-banner">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#b88b1d" stroke-width="2"/><path d="M12 8v4M12 16h.01" stroke="#b88b1d" stroke-width="2" stroke-linecap="round"/></svg>
       <div>
-        선택과목 운영학점은 모두 <b>3학점</b>입니다. 3학년에는 「주 선택」과 「융합·진로 선택」 두 풀에서 각각 골라야 합니다.<br>
+        선택과목 운영학점은 모두 <b>3학점</b>입니다. 3학년에는 다음 두 풀에서 각각 골라야 합니다:<br>
+        • <b>[그룹1] 주 선택</b> — 국·영·수·사·과 중심<br>
+        • <b>[그룹2] 융합·진로 선택</b> — 융합선택 및 예술/정보/제2외국어/한문/교양 교과군<br>
         <b>2·3학년 기술·가정/정보/제2외국어/한문/교양 교과군에서 최소 4과목 × 3학점</b> 이수 필요.
       </div>
     </div>
@@ -842,13 +844,13 @@ const SEMESTERS = [
     code: '3-1', title: '3학년 1학기', color: 'B',
     pools: [
       {
-        kind: '주 선택', credits: 18, pick: 6,
-        note: '국어·수학·영어·사회·과학에서 폭넓게 선택. 수능 출제 과목 ★ 표시.',
+        kind: '[그룹1] 주 선택', credits: 18, pick: 6,
+        note: '국·영·수·사·과 중심. 수능 출제 과목 ★ 표시.',
         getSubjects: () => [...SUBJECTS.BC, ...SUBJECTS.A_late],
       },
       {
-        kind: '융합·진로 선택', credits: 6, pick: 2,
-        note: '기술·가정/정보/제2외국어/한문/교양 「최소 4과목 × 3학점」 충족용. 융합 선택은 석차 등급 미산출.',
+        kind: '[그룹2] 융합·진로 선택', credits: 6, pick: 2,
+        note: '융합선택 및 예술/정보/제2외국어/한문/교양 교과군. 「최소 4과목 × 3학점」 충족용. 융합 선택은 석차 등급 미산출.',
         getSubjects: () => SUBJECTS.D,
       },
     ],
@@ -857,13 +859,13 @@ const SEMESTERS = [
     code: '3-2', title: '3학년 2학기', color: 'C',
     pools: [
       {
-        kind: '주 선택', credits: 21, pick: 7,
-        note: '3-1과 같은 풀이지만 과학 진로 4과목(역학과 에너지 등)은 포함되지 않습니다.',
+        kind: '[그룹1] 주 선택', credits: 21, pick: 7,
+        note: '국·영·수·사·과 중심. 3-1과 같은 풀이지만 과학 진로 4과목(역학과 에너지 등)은 포함되지 않습니다.',
         getSubjects: () => SUBJECTS.BC,
       },
       {
-        kind: '융합·진로 선택', credits: 6, pick: 2,
-        note: '3-1과 동일한 융합·진로 풀에서 선택.',
+        kind: '[그룹2] 융합·진로 선택', credits: 6, pick: 2,
+        note: '융합선택 및 예술/정보/제2외국어/한문/교양 교과군. 3-1과 동일한 풀에서 선택.',
         getSubjects: () => SUBJECTS.D,
       },
     ],
