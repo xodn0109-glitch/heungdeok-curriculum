@@ -226,6 +226,8 @@
     white-space: nowrap;
   }
   .pill .c { font-weight: 800; opacity: .75; }
+  .pill .c::before { content: "("; }
+  .pill .c::after { content: ")"; }
   .pill.국어 { background: #fff0e9; color: #b34a1a; }
   .pill.수학 { background: #e7f0ff; color: #2c4ea3; }
   .pill.영어 { background: #fff7d4; color: #8a6800; }
@@ -238,7 +240,7 @@
   .pill.제2외국어, .pill.한문 { background: #fff0eb; color: #a04324; }
   .pill.교양 { background: #ecfaff; color: #16607a; }
   .pill.cross { background: white; border-color: #ddd; color: var(--text-soft); border-style: dashed; }
-  .pill.cross .c::before { content: "↔ "; }
+  .pill.cross .c::before { content: "↔ ("; }
 
   /* Choice groups */
   .choice-banner {
